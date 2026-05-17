@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Une surprise pour toi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ── Écran 1 : Intro ── -->
+  <section id="screen-intro" class="screen active">
+    <div class="inner">
+      <p class="eyebrow">Pour toi</p>
+      <h1>Nous avons<br>une surprise<br>pour toi</h1>
+      <p class="lead" id="intro-message"></p>
+      <button class="btn" onclick="showScreen('screen-messages')">Voir les messages</button>
+    </div>
+  </section>
+
+  <!-- ── Écran 2 : Messages des familles ── -->
+  <section id="screen-messages" class="screen">
+    <div class="inner">
+
+      <div class="family-card" id="card-0">
+        <p class="step">1 · 3</p>
+        <h2 id="family-nom-0"></h2>
+        <div class="divider"></div>
+        <button class="reveal-btn" id="reveal-btn-0" onclick="revealCard(0)">Appuyer pour révéler</button>
+        <div class="card-body" id="body-0">
+          <p class="family-message" id="family-message-0"></p>
+          <div class="tip-block">
+            <span class="tip-label">Leur indice</span>
+            <p class="tip-text" id="family-indice-0"></p>
+          </div>
+          <button class="btn" onclick="nextFamily(0)">Suivant →</button>
+        </div>
+      </div>
+
+      <div class="family-card" id="card-1" style="display:none">
+        <p class="step">2 · 3</p>
+        <h2 id="family-nom-1"></h2>
+        <div class="divider"></div>
+        <button class="reveal-btn" id="reveal-btn-1" onclick="revealCard(1)">Appuyer pour révéler</button>
+        <div class="card-body" id="body-1">
+          <p class="family-message" id="family-message-1"></p>
+          <div class="tip-block">
+            <span class="tip-label">Leur indice</span>
+            <p class="tip-text" id="family-indice-1"></p>
+          </div>
+          <button class="btn" onclick="nextFamily(1)">Suivant →</button>
+        </div>
+      </div>
+
+      <div class="family-card" id="card-2" style="display:none">
+        <p class="step">3 · 3</p>
+        <h2 id="family-nom-2"></h2>
+        <div class="divider"></div>
+        <button class="reveal-btn" id="reveal-btn-2" onclick="revealCard(2)">Appuyer pour révéler</button>
+        <div class="card-body" id="body-2">
+          <p class="family-message" id="family-message-2"></p>
+          <div class="tip-block">
+            <span class="tip-label">Leur indice</span>
+            <p class="tip-text" id="family-indice-2"></p>
+          </div>
+          <button class="btn" onclick="showScreen('screen-scratch')">Découvrir la surprise →</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Écran 3 : Carte à gratter ── -->
+  <section id="screen-scratch" class="screen">
+    <div class="inner">
+      <p class="eyebrow">Et maintenant...</p>
+      <h2>Gratte la carte<br>pour révéler<br>ta surprise</h2>
+      <div class="scratch-wrap">
+        <div class="scratch-under">
+          <p class="destination-hidden js-destination"></p>
+        </div>
+        <canvas id="scratch-canvas"></canvas>
+      </div>
+      <p class="scratch-hint">Gratte avec ton doigt ou ta souris</p>
+    </div>
+  </section>
+
+  <!-- ── Écran 4 : Révélation ── -->
+  <section id="screen-reveal" class="screen">
+    <div class="reveal-hero">
+      <img id="hero-img" src="" alt="">
+    </div>
+    <div class="inner reveal-inner">
+      <p class="eyebrow">Votre prochain voyage</p>
+      <h1 class="destination-title js-destination"></h1>
+
+      <div class="detail-block">
+        <h3>Les dates</h3>
+        <p id="trip-dates"></p>
+      </div>
+
+      <div class="detail-block">
+        <h3>Au programme</h3>
+        <ul id="trip-programme"></ul>
+      </div>
+
+      <div class="detail-block closing">
+        <p id="closing-note"></p>
+      </div>
+
+      <div class="restart-block">
+        <button class="restart-btn" onclick="restartExperience()">Revivre la surprise depuis le début</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="content.js"></script>
+  <script src="scratch.js"></script>
+</body>
+</html>

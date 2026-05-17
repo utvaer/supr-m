@@ -1,0 +1,328 @@
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Tokens ── */
+:root {
+  --bg:     #f5f0e8;
+  --card:   #ede8de;
+  --border: #d4cdc0;
+  --ink:    #2c2416;
+  --muted:  #7a6e5f;
+  --accent: #4a7ca8;
+}
+
+/* ── Base ── */
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Screens ── */
+.screen {
+  display: none;
+  min-height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.25rem;
+}
+
+.screen.active {
+  display: flex;
+  animation: fadeUp 0.5s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Inner container ── */
+.inner {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ── Typography ── */
+.eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.4rem, 9vw, 3.4rem);
+  font-weight: 600;
+  line-height: 1.12;
+}
+
+h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.9rem, 7vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.lead {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+/* ── Primary button ── */
+.btn {
+  display: block;
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 1rem 1.75rem;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:active { opacity: 0.75; }
+
+/* ── Ghost reveal button ── */
+.reveal-btn {
+  display: block;
+  width: 100%;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 0.9rem 1.4rem;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.reveal-btn:active {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+/* ── Divider ── */
+.divider {
+  width: 2.5rem;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── Step indicator ── */
+.step {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+/* ── Family card ── */
+.family-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+/* ── Card revealed body ── */
+.card-body {
+  display: none;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.family-message {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--ink);
+}
+
+.tip-block {
+  background: var(--card);
+  border-left: 2px solid var(--accent);
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.tip-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.tip-text {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--ink);
+}
+
+/* ── Scratch screen ── */
+.scratch-wrap {
+  position: relative;
+  width: 100%;
+  height: clamp(300px, calc(100dvh - 320px), 620px);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.scratch-under {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+}
+
+.destination-hidden {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: var(--ink);
+  padding: 0 1rem;
+}
+
+#scratch-canvas {
+  position: absolute;
+  inset: 0;
+  touch-action: none;
+}
+
+.scratch-hint {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ── Reveal screen ── */
+#screen-reveal {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+.reveal-hero {
+  width: 100%;
+  height: 52vh;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.reveal-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.reveal-inner {
+  padding: 2.5rem 1.5rem 4rem;
+  gap: 2rem;
+}
+
+.destination-title {
+  font-size: clamp(2.6rem, 11vw, 4.2rem);
+}
+
+.detail-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.25rem;
+}
+
+.detail-block p,
+.detail-block li {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.detail-block ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.detail-block ul li::before {
+  content: '— ';
+  color: var(--border);
+}
+
+.closing {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0.5rem;
+}
+
+.closing p {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* ── Restart ── */
+.restart-block {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.restart-btn {
+  background: none;
+  border: none;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0.5rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.2s;
+}
+
+.restart-btn:active {
+  color: var(--ink);
+}
